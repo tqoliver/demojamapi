@@ -1,3 +1,6 @@
+//This is the Demo Jam API that includes an in memory database.
+//This API has all of the CRUD functionality
+
 package main
 
 
