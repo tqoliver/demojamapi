@@ -1,0 +1,33 @@
+name: DemoJamAPI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 1' # Run every Monday at 2 AM UTC
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: go # Specify the languages to scan (e.g., javascript, python, java, cpp)
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3 # Automatically builds compiled languages if applicable
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
